@@ -23,7 +23,7 @@ pipeline {
 
        stage ('NodeJsScan Analysis') {
             steps {
-                sh 'nodejsscan --directory `pwd` --output /{JENKINS HOME DIRECTORY}/reports/nodejsscan-report'
+                sh 'nodejsscan --directory `pwd` --output /reports/nodejsscan-report'
             }
         }
     }
