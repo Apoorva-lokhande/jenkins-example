@@ -21,9 +21,9 @@ pipeline {
         }
 
 
-       stage ('NodeJsScan Analysis') {
+       stage ('Performing njsscan check') {
             steps {
-                sh 'nodejsscan --directory `pwd` --output /reports/nodejsscan-report'
+                sh 'bash ~/scripts/njsscan.sh'
             }
         }
     }
