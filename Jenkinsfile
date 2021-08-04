@@ -21,9 +21,9 @@ pipeline {
         }
 
 
-       stage ('Performing njsscan check') {
+       stage ('Deploy stage') {
             steps {
-                sh 'njsscan -o ~/reports/nodejsscan-report.json --json  ./dvna'
+                sh 'mvn deploy'
             }
         }
     }
