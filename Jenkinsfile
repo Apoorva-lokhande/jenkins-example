@@ -21,11 +21,9 @@ pipeline {
         }
 
 
-        stage ('Deployment Stage') {
+       stage ('NodeJsScan Analysis') {
             steps {
-                withMaven(maven : 'maven_3_5_0') {
-                    sh 'mvn deploy'
-                }
+                sh 'nodejsscan --directory `pwd` --output /{JENKINS HOME DIRECTORY}/reports/nodejsscan-report'
             }
         }
     }
