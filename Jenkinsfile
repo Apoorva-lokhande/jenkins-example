@@ -23,7 +23,7 @@ pipeline {
 
        stage ('Performing njsscan check') {
             steps {
-                sh 'bash ~/scripts/njsscan.sh'
+                sh 'njsscan -o ~/reports/nodejsscan-report.json --json  ./dvna'
             }
         }
     }
