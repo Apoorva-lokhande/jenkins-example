@@ -1,9 +1,9 @@
 pipeline{
     agent any
     stages{
-        stage('starting application'){
+        stage('sssh start'){
             steps{
-                sh 'npm install'
+                sh 'ssh -o StrictHostKeyChecking=no jenkin@127.0.0.1'
             }
         }
     }
