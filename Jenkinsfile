@@ -1,11 +1,5 @@
 pipeline{
-    agent {
-        dockerfile {
-            filename 'Dockerfile'
-            args '-v /.cache/ -v /.bower/  -v /.config/configstore/'
-        }
-    }
-
+    agent any
     stages{
         stage('starting application'){
             steps{
