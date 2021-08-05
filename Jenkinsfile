@@ -1,34 +1,23 @@
 pipeline {
     agent any
-
     stages {
-        stage ('Compile Stage') {
-
+        stage ('Building the application') {
             steps {
-                withMaven(maven : 'maven_3_5_0') {
-                    echo 'clean compile'
-                }
+                sh 'npm install'
             }
         }
-
-        stage ('Testing Stage') {
-
+        stage ('Performing njsscan analysis') {
             steps {
-                withMaven(maven : 'maven_3_5_0') {
-                    echo 'test'
-                }
+                sh 'bash ~/scripts/njsscan.sh'
             }
         }
-
-
-      
-        stage ('Deploy Stage') {
-
+        stage ('Deploying App to production server'){
             steps {
-                withMaven(maven : 'maven_3_5_0') {
-                    echo 'deploy'
-                }
-            }
+                sh 'echo "Deploying App to production Server"'
+                sh 'ssh -o StrictHostKeyChecking=no jenkin@127.0.0.1'
+           }
         }
     }
+      
 }
+     
