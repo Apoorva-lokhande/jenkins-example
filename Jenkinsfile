@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('sssh start'){
             steps{
-                sh 'ssh -o StrictHostKeyChecking=no jenkin@127.0.0.1'
+                sh 'ssh -o StrictHostKeyChecking=no jenkin@192.168.1.251'
             }
         }
     }
