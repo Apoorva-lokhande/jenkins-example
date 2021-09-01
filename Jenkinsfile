@@ -24,3 +24,4 @@ pipeline {
         sh 'docker cp dvna-app:/app/ ~/ && mkdir ~/reports && chmod 777 ~/reports'        
       }
     }
+}
