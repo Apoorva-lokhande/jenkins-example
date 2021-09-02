@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage ('Initialization') {
       steps {
-        sh 'echo "Starting the build!"'
+        sh 'pwd'
         }
     }
 
