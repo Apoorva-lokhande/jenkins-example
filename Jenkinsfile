@@ -12,8 +12,8 @@ pipeline {
       environment {
         MYSQL_USER="dvna"
         MYSQL_DATABASE="dvna"
-        MYSQL_PASSWORD=<PASSWORD>
-        MYSQL_RANDOM_ROOT_PASSWORD=<YES_OR_NO>
+        MYSQL_PASSWORD="Prlokhande_5398"
+        MYSQL_RANDOM_ROOT_PASSWORD="yes"
         MYSQL_HOST="mysql-db"
         MYSQL_PORT=3306
       }
