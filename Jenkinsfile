@@ -26,11 +26,6 @@ pipeline {
     } 
 
 
-    stage('SAST and DAST Scans') {
-      ........
-    }
-
-
     stage ('Remove DVNA from Jenkins') {
       steps {
         sh 'rm -rf ~/app'
