@@ -14,11 +14,7 @@ pipeline {
         
       }
     }
-    script {
-      sshagent(["your-ssh-credentals"]) {
-          sh "..."
-      }
-}
-
   }
 }
+
+
