@@ -24,6 +24,23 @@ pipeline {
         sh 'docker cp dvna-app:/app/ ~/'        
       }
     } 
+    stage('NodeJsScan Analysis') {
+      steps {
+        sh 'njsscan --json -o ~/reports/nodejsscan-report ~/app || true'
+      }
+    }
+
+    stage('Auditjs Analysis') {
+      steps {
+        sh 'cd ~/app; auditjs ossi > ~/reports/auditjs-report || true'
+      }
+    }
+
+    stage ('OWASP Dependency-Check Analysis') {
+      steps {
+        sh '~/dependency-check/bin/dependency-check.sh --scan ~/app --out ~/reports/dependency-check-report --format JSON --prettyPrint || true'
+      }
+    }
 
 
 
