@@ -30,6 +30,41 @@ pipeline {
         sh 'njsscan --json -o ~/reports/nodejsscan-report ~/app || true'
       }
     }
+    stage('Auditjs Analysis') {
+      steps {
+        sh 'cd ~/app; auditjs ossi > ~/reports/auditjs-report || true'
+      }
+    }
+
+    stage ('OWASP Dependency-Check Analysis') {
+      steps {
+        sh '~/dependency-check/bin/dependency-check.sh --scan ~/app --out ~/reports/dependency-check-report --format JSON --prettyPrint || true'
+      }
+    }
+
+    stage('OWASP ZAP Analysis') {
+      steps {
+        sh 'docker run --rm -i -u zap --name owasp-zap -v ~/reports/:/zap/wrk/ owasp/zap2docker-stable zap-baseline.py -t http://192.168.1.39:9090 -r zap-report.html -l PASS || true'
+      }
+    }
+
+    stage ('Generating Software Bill of Materials') {
+      steps {
+        sh 'cd ~/app && cyclonedx-bom -o ~/reports/sbom.xml'
+      }
+    }
+
+    stage ('JSHint Analysis') {
+      steps {
+        sh 'jshint $(find ~/app -type f -name "*.js" -o -name "*.ejs" | grep -v node_modules) > ~/reports/jshint-report || true'
+      }
+    }
+
+    stage ('ESLint Analysis') {
+      steps {
+        sh 'eslint -c ~/.eslintrc.json -f html --ext .js,.ejs -o ~/reports/eslint-report.html ~/app || true'
+      }
+    }
 
     stage ('Remove DVNA from Jenkins') {
       steps {
