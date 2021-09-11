@@ -42,10 +42,10 @@ pipeline {
 
     stage ('Deploy DVNA to Production') {
       steps {
-        sh 'ssh -o StrictHostKeyChecking=no tariq@192.168.56.102 "docker stop dvna-app && docker stop dvna-mysql && docker rm dvna-app && docker rm dvna-mysql && docker rmi appsecco/dvna || true"'
-        sh 'scp ~/vars.env tariq@192.168.56.102:~/'
-        sh 'ssh -o StrictHostKeyChecking=no tariq@192.168.56.102 "docker run -d --name dvna-mysql --env-file ~/vars.env mysql:5.7 tail -f /dev/null"'
-        sh 'ssh -o StrictHostKeyChecking=no tariq@192.168.56.102 "docker run -d --name dvna-app --env-file ~/vars.env --link dvna-mysql:mysql-db -p 9090:9090 appsecco/dvna"'
+        sh 'ssh -o StrictHostKeyChecking=no prod-vm@192.168.1.39 "docker stop dvna-app && docker stop dvna-mysql && docker rm dvna-app && docker rm dvna-mysql && docker rmi appsecco/dvna || true"'
+        sh 'scp ~/vars.env prod-vm@192.168.1.39:~/'
+        sh 'ssh -o StrictHostKeyChecking=no prod-vm@192.168.1.39 "docker run -d --name dvna-mysql --env-file ~/vars.env mysql:5.7 tail -f /dev/null"'
+        sh 'ssh -o StrictHostKeyChecking=no prod-vm@192.168.1.39 "docker run -d --name dvna-app --env-file ~/vars.env --link dvna-mysql:mysql-db -p 8080:8080 appsecco/dvna"'
       }
     }
 
