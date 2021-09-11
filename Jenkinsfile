@@ -22,7 +22,7 @@ pipeline {
         sh 'docker run --rm -d --name dvna-mysql --env-file ~/vars.env mysql:5.7 tail -f /dev/null'
         sh 'docker run --rm -d --name dvna-app --env-file ~/vars.env --link dvna-mysql:mysql-db -p 9090:9090 appsecco/dvna'
         sh 'docker cp dvna-app:/app/ ~/ chmod 777 ~/reports'               
-        
+        sh 'docker cp dvna-app:/app/reports ~/ && chmod 777 ~/reports'
       }
 
     } 
